@@ -55,4 +55,8 @@ export class CartDetailsComponent {
   removeAll() {
     this.cartService.removeAll();
   }
+
+  purchase(products: CartProduct[]) {
+    this.cartService.purchase(products.map(p => ({id: p.id, quantity: p.quantity})));
+  }
 }

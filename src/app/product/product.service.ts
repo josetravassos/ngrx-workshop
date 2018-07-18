@@ -13,14 +13,14 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return defer(() => of(data).pipe(
-      delay(5 * 1000),
+      delay(1 * 1000),
     ));
   }
 
   getProduct(id: string): Observable<Product> {
     const product = data.find(p => p.id === id);
     return defer(() => of(product).pipe(
-      delay(2 * 1000),
+      delay(1 * 1000),
     ));
   }
 }

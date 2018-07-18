@@ -17,6 +17,9 @@
       Remove All
     </button>
     <div class="fill"></div>
+    <button mat-raised-button
+    color="primary"
+    (click)="purchase(cartProducts)">Purchase</button>
     <div class="total">Total: {{(total$ | async) || 0 | currency}}</div>
   </footer>
 </ng-container>

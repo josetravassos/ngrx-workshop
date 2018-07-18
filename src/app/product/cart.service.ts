@@ -16,6 +16,8 @@ export class CartService {
       shareReplay(1),
   );
 
+  constructor(private readonly storageService: StorageService) {}
+
   addToCart(id: string): void {
     this.getCartItems()
         .pipe(
@@ -42,12 +44,28 @@ export class CartService {
         .subscribe(() => this.itemsChanged$.next(undefined));
   }
 
+  purchase(purchaseItems: {id: string; quantity: number}[]) {
+    this.getCartItems()
+        .pipe(
+          delayWhen(ids => {
+            console.log(purchaseItems, ids);
+            for (const item of purchaseItems) {
+              console.log(item);
+              for (let i = 0; i < item.quantity; i++) {
+                console.log(item, i);
+                ids.splice(ids.indexOf(item.id), 1);
+              }
+            }
+            return this.storageService.set(CART_PREFIX, ids.join(','));
+          }),
+          )
+      .subscribe(() => this.itemsChanged$.next(undefined));
+  }
+
   private getCartItems(): Observable<string[]> {
     return this.storageService.fetch(CART_PREFIX)
         .pipe(
             map(ids => (ids) ? ids.split(',') : []),
         );
   }
-
-  constructor(private readonly storageService: StorageService) {}
 }
