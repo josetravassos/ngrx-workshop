@@ -3,8 +3,8 @@ import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import {Product} from '../model/product';
-import {CartService} from '../product/cart.service';
-import {ProductService} from '../product/product.service';
+import {CartService} from '../services/cart.service';
+import {ProductService} from '../services/product.service';
 
 export interface CartProduct extends Product { quantity: number; }
 

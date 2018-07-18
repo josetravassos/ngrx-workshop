@@ -4,10 +4,10 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import {filter, map, shareReplay, switchMap, tap} from 'rxjs/operators';
 
-import {ProductService} from '../product/product.service';
-import {RatingService} from '../product/rating.service';
+import {ProductService} from '../services/product.service';
+import {RatingService} from '../services/rating.service';
 import { Product } from '../model/product';
-import { CartService } from '../product/cart.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-details',

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { RoutingModule } from './routing.module';
-import { ProductModule } from './product/product.module';
+import { ProductModule } from './services/product.module';
 import { CartModule } from './cart/cart.module';
 import {MatToolbarModule, MatIconModule} from '@angular/material';
 import { ProductDetailsModule } from './product-details/product-details.module';

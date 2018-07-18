@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CartService } from '../product/cart.service';
+import { CartService } from '../services/cart.service';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
