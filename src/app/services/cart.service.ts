@@ -48,11 +48,8 @@ export class CartService {
     this.getCartItems()
         .pipe(
           delayWhen(ids => {
-            console.log(purchaseItems, ids);
             for (const item of purchaseItems) {
-              console.log(item);
               for (let i = 0; i < item.quantity; i++) {
-                console.log(item, i);
                 ids.splice(ids.indexOf(item.id), 1);
               }
             }
