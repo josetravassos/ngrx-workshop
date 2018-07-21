@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StarsComponent } from './stars.component';
+import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material';
 
+import { StarsComponent } from './stars.component';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    MatIconModule,
-  ],
+  imports: [CommonModule, MatIconModule],
   declarations: [StarsComponent],
   exports: [StarsComponent],
 })
-export class StarsModule { }
+export class StarsModule {}

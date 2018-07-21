@@ -1,17 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CartComponent } from './cart.component';
-import { MatIconModule, MatButtonModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MatButtonModule, MatIconModule} from '@angular/material';
+import {RouterModule} from '@angular/router';
+
+import {CartComponent} from './cart.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [CartComponent],
   exports: [CartComponent],
 })
-export class CartModule { }
+export class CartModule {}

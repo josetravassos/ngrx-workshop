@@ -1,4 +1,3 @@
-
 export enum Category {
   BOOKS = 'Books',
   ELECTRONICS = 'Electronics',
@@ -12,5 +11,5 @@ export interface Product {
   title: string;
   description: string;
   url: string;
-  rating: 1|2|3|4|5;
+  rating: 1 | 2 | 3 | 4 | 5;
 }

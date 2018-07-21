@@ -1,9 +1,16 @@
-import { Component, Input, HostBinding, HostListener, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-stars',
   templateUrl: './stars.component.html',
-  styleUrls: ['./stars.component.scss']
+  styleUrls: ['./stars.component.scss'],
 })
 export class StarsComponent {
   @HostBinding('class.can-rate')
@@ -29,7 +36,7 @@ export class StarsComponent {
   }
 
   starMouseEnter(star: number) {
-    this.starOver = (this.canRate) ? star : 0;
+    this.starOver = this.canRate ? star : 0;
   }
 
   starMouseLeave() {
@@ -37,7 +44,9 @@ export class StarsComponent {
   }
 
   rate(star: number) {
-    if (!this.canRate) { return; }
+    if (!this.canRate) {
+      return;
+    }
     this.rated = star;
     this.ratingChange.emit(star);
   }

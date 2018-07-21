@@ -1,21 +1,24 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Observable} from '../../../node_modules/rxjs';
+import { Observable } from 'rxjs';
 
-import {StorageService} from './storage.service';
+import { StorageService } from './storage.service';
 
 const RATING_PREFIX = 'rating:';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class RatingService {
-
-  setCustomerRating({id, rating}: {id: string, rating: number}):
-      Observable<void> {
+  setCustomerRating({
+    id,
+    rating,
+  }: {
+    id: string;
+    rating: number;
+  }): Observable<void> {
     return this.storageService.set(RATING_PREFIX + id, String(rating));
   }
 
-  getCustomerRating(id: string):
-      Observable<null|string> {
+  getCustomerRating(id: string): Observable<null | string> {
     return this.storageService.fetch(RATING_PREFIX + id);
   }
 

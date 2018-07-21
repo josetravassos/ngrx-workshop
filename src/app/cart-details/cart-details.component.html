@@ -9,26 +9,35 @@
         </div>
         <div class="details">
           <div>Price: {{product.price | currency}}</div>
-          <button mat-button (click)="removeOne(product.id)">Remove</button>
+          <button
+            mat-button
+            (click)="removeOne(product.id)">
+            Remove
+          </button>
         </div>
       </mat-card-content>
     </mat-card>
     <footer>
-      <button type="button" mat-button (click)="removeAll()">
+      <button
+        type="button"
+        mat-button
+        (click)="removeAll()">
         Remove All
       </button>
       <div class="fill"></div>
-      <button mat-raised-button color="primary" (click)="purchase(cartProducts)">Purchase</button>
-      <div class="total">Total: {{(total$ | async) || 0 | currency}}</div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="purchase(cartProducts)">
+        Purchase
+      </button>
+      <div class="total">
+        Total: {{(total$ | async) || 0 | currency}}
+      </div>
     </footer>
   </ng-container>
 </ng-container>
 
+<ng-template #loading>Loading...</ng-template>
 
-<ng-template #loading>
-    Loading...
-  </ng-template>
-
-<ng-template #noProducts>
-  No products here yet
-</ng-template>
+<ng-template #noProducts>No products here yet</ng-template>
