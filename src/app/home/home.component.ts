@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {data} from '../services/product-data';
-import { Product } from '../model/product';
-import { ProductService } from '../services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
-import { Store } from '@ngrx/store';
+
+import {SetProducts} from '../actions';
+import {Product} from '../model/product';
+import {data} from '../services/product-data';
+import {ProductService} from '../services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +15,12 @@ import { Store } from '@ngrx/store';
 export class HomeComponent implements OnInit {
   products$: Observable<Product[]>;
 
-  constructor(private readonly productService: ProductService,
-  private readonly store: Store<{products: Product[]}>) { }
+  constructor(
+      private readonly productService: ProductService,
+      private readonly store: Store<{products: Product[]}>) {}
 
   ngOnInit() {
+    this.store.dispatch(new SetProducts(data));
     this.products$ = this.store.select(state => state.products);
   }
-
 }
