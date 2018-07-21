@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Product } from '../model/product';
@@ -13,9 +14,12 @@ import { ProductService } from '../services/product.service';
 export class HomeComponent implements OnInit {
   products$: Observable<Product[]>;
 
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly store: Store<{ products: Product[] }>
+  ) {}
 
   ngOnInit() {
-    this.products$ = this.productService.getProducts();
+    this.products$ = this.store.select(state => state.products);
   }
 }
