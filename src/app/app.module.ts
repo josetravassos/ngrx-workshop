@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MatIconModule, MatToolbarModule } from '@angular/material';
+import {
+  MatIconModule,
+  MatToolbarModule,
+  MatSnackBarModule,
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -25,6 +29,7 @@ import { ProductEffects } from './effects';
     ProductDetailsModule,
     MatIconModule,
     MatToolbarModule,
+    MatSnackBarModule,
     StoreModule.forRoot({ products: reducer }),
     EffectsModule.forRoot([ProductEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
