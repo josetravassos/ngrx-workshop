@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { SetProducts } from '../actions';
 import { Product } from '../model/product';
 import { data } from '../services/product-data';
 import { ProductService } from '../services/product.service';
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(new SetProducts(data));
     this.products$ = this.store.select(state => state.products);
   }
 }
