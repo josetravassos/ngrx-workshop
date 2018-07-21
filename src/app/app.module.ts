@@ -11,6 +11,8 @@ import { HomeModule } from './home/home.module';
 import { ProductDetailsModule } from './product-details/product-details.module';
 import { reducer } from './reducer';
 import { RoutingModule } from './routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +26,7 @@ import { RoutingModule } from './routing.module';
     MatIconModule,
     MatToolbarModule,
     StoreModule.forRoot({ products: reducer }),
+    EffectsModule.forRoot([ProductEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 50 }),
   ],
   bootstrap: [AppComponent],

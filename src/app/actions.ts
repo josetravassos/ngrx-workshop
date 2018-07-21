@@ -8,4 +8,9 @@ export class SetProducts implements Action {
   constructor(readonly payload: Product[]) {}
 }
 
-export type All = SetProducts;
+export const FETCH_PRODUCTS = 'Fetch Products';
+export class FetchProducts implements Action {
+  type: typeof FETCH_PRODUCTS = FETCH_PRODUCTS;
+}
+
+export type All = SetProducts | FetchProducts;
