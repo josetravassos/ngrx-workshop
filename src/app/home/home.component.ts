@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as actions from '../actions';
 import { Product } from '../model/product';
 
 import * as selectors from '../selectors';
@@ -12,12 +11,9 @@ import * as selectors from '../selectors';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  products$: Observable<Product[]>;
+export class HomeComponent {
+  products$: Observable<Product[]> = this.store.select(selectors.getProducts);
+  loading$ = this.store.select(selectors.isProductsLoading);
 
   constructor(private readonly store: Store<{}>) {}
-
-  ngOnInit() {
-    this.products$ = this.store.select(selectors.getProducts);
-  }
 }

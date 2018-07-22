@@ -57,5 +57,12 @@ export class ProductEffects {
   );
 
   @Effect()
+  refetchProduct: Observable<Action> = this.actions$.pipe(
+    ofType<RouterNavigationAction<RouterStateUrl>>(ROUTER_NAVIGATION),
+    filter(({ payload }) => payload.event.url === '/home'),
+    map(() => new actions.FetchProducts())
+  );
+
+  @Effect()
   init$: Observable<Action> = defer(() => of(new actions.FetchProducts()));
 }
