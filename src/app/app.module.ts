@@ -14,7 +14,7 @@ import { CartModule } from './cart/cart.module';
 import { HomeModule } from './home/home.module';
 import { ProductDetailsModule } from './product-details/product-details.module';
 import { reducer } from './reducer';
-import { RoutingModule } from './routing.module';
+import { RoutingModule } from './router/routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './effects';
 
