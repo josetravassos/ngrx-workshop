@@ -1,12 +1,14 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map, switchMap, catchError, filter } from 'rxjs/operators';
 
 import * as actions from './actions';
 import { ProductService } from './services/product.service';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { RouterNavigationAction, ROUTER_NAVIGATION } from '@ngrx/router-store';
+import { RouterStateUrl } from './router/custom-router-serializer';
 
 @Injectable()
 export class ProductEffects {
@@ -23,6 +25,18 @@ export class ProductEffects {
       this.productService.getProducts().pipe(
         map(products => new actions.FetchProductsSuccess(products)),
         catchError(() => of(new actions.FetchProductsError()))
+      )
+    )
+  );
+
+  @Effect()
+  fetchProduct: Observable<Action> = this.actions$.pipe(
+    ofType<RouterNavigationAction<RouterStateUrl>>(ROUTER_NAVIGATION),
+    filter(({ payload }) => payload.event.url.startsWith('/details/')),
+    switchMap(({ payload }) =>
+      this.productService.getProduct(payload.routerState.params['id']).pipe(
+        map(product => new actions.FetchProductSuccess(product)),
+        catchError(() => of(new actions.FetchProductError()))
       )
     )
   );

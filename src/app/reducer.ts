@@ -18,6 +18,13 @@ export function reducer(
     case actions.FETCH_PRODUCTS_SUCCESS: {
       return action.payload;
     }
+    case actions.FETCH_PRODUCT_SUCCESS: {
+      const indexOfProduct = state.findIndex(p => p.id === action.payload.id);
+      // Remove old one and replace with single product fetch,
+      state.splice(indexOfProduct, 1, action.payload);
+      // Make it immutable.
+      return [...state];
+    }
     default: {
       return state;
     }

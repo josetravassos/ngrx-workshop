@@ -5,10 +5,10 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 
 import { Product } from '../model/product';
-import { ProductService } from '../services/product.service';
 import { RatingService } from '../services/rating.service';
 import { Store } from '@ngrx/store';
 import * as cartActions from '../cart/actions';
+import * as selectors from '../selectors';
 
 @Component({
   selector: 'app-product-details',
@@ -18,11 +18,7 @@ import * as cartActions from '../cart/actions';
 export class ProductDetailsComponent {
   reFetchTrigger$ = new BehaviorSubject<void>(undefined);
 
-  product$ = this.router.paramMap.pipe(
-    map((params: ParamMap) => params.get('id')),
-    filter((id: string | undefined): id is string => !!id),
-    switchMap(id => this.productService.getProduct(id))
-  );
+  product$ = this.store.select(selectors.getCurrentProduct);
 
   customerRating$: Observable<number> = combineLatest(
     this.product$,
@@ -30,6 +26,8 @@ export class ProductDetailsComponent {
     // We don't really care about refetch values, so we omit them.
     product => product
   ).pipe(
+    // Product should exist
+    filter(product => !!product),
     map(product => product.id),
     switchMap(id => this.ratingService.getCustomerRating(id)),
     // Map to numbers. If null then rating is 0, which means 'not
@@ -42,7 +40,6 @@ export class ProductDetailsComponent {
 
   constructor(
     private readonly router: ActivatedRoute,
-    private readonly productService: ProductService,
     private readonly ratingService: RatingService,
     private readonly store: Store<{}>,
     private readonly location: Location

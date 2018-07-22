@@ -6,6 +6,10 @@ import { Product } from '../model/product';
 
 import { data } from './product-data';
 
+function stripDescription(originalData: Product[]) {
+  return originalData.map(d => ({ ...d, description: '' }));
+}
+
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   constructor() {}
@@ -15,7 +19,9 @@ export class ProductService {
       () =>
         Math.random() < 0.25
           ? throwError('Internal Error')
-          : of(data).pipe(delay(1 * 1000))
+          : // Pretend that data comes without Description when NOT requested
+            // for a particular product.
+            of(stripDescription(data)).pipe(delay(1 * 1000))
     );
   }
 
