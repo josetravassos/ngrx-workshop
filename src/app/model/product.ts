@@ -13,3 +13,7 @@ export interface Product {
   url: string;
   rating: 1 | 2 | 3 | 4 | 5;
 }
+
+export interface CartProduct extends Product {
+  quantity: number;
+}

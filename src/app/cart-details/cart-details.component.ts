@@ -2,15 +2,10 @@ import { Component } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Product } from '../model/product';
-import { CartService } from '../services/cart.service';
-import { ProductService } from '../services/product.service';
+import { Product, CartProduct } from '../model/product';
 import { Store } from '@ngrx/store';
 import * as selectors from '../cart/selectors';
-
-export interface CartProduct extends Product {
-  quantity: number;
-}
+import * as cartActions from '../cart/actions';
 
 @Component({
   selector: 'app-cart-details',
@@ -24,22 +19,17 @@ export class CartDetailsComponent {
 
   total$ = this.store.select(selectors.getCartTotal);
 
-  constructor(
-    private readonly cartService: CartService,
-    private readonly store: Store<{}>
-  ) {}
+  constructor(private readonly store: Store<{}>) {}
 
   removeOne(id: string) {
-    this.cartService.removeOne(id);
+    this.store.dispatch(new cartActions.RemoveItem(id));
   }
 
   removeAll() {
-    this.cartService.removeAll();
+    this.store.dispatch(new cartActions.RemoveAll());
   }
 
   purchase(products: CartProduct[]) {
-    this.cartService.purchase(
-      products.map(p => ({ id: p.id, quantity: p.quantity }))
-    );
+    this.store.dispatch(new cartActions.PurchaseItems(products));
   }
 }
