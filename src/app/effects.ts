@@ -1,6 +1,6 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, defer } from 'rxjs';
 import { map, switchMap, catchError, filter } from 'rxjs/operators';
 
 import * as actions from './actions';
@@ -55,4 +55,7 @@ export class ProductEffects {
       );
     })
   );
+
+  @Effect()
+  init$: Observable<Action> = defer(() => of(new actions.FetchProducts()));
 }
