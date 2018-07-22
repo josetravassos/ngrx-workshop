@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Product } from '../model/product';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
+import { Store } from '@ngrx/store';
+import * as selectors from '../cart/selectors';
 
 export interface CartProduct extends Product {
   quantity: number;
@@ -17,9 +19,9 @@ export interface CartProduct extends Product {
 })
 export class CartDetailsComponent {
   cartProducts$: Observable<CartProduct[]> = combineLatest(
-    this.cartService.cartItemsIds$,
+    this.store.select(selectors.getCartItemsIds),
     this.productService.getProducts(),
-    (ids, products) => ({ ids, products }),
+    (ids, products) => ({ ids, products })
   ).pipe(
     map(({ ids, products }) => {
       // Reduce ids array to id:quantity Indexable
@@ -48,7 +50,8 @@ export class CartDetailsComponent {
 
   constructor(
     private readonly cartService: CartService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly store: Store<{}>
   ) {}
 
   removeOne(id: string) {
