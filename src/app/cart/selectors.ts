@@ -33,6 +33,10 @@ export const getCartProducts = createSelector<
   Product[],
   CartProduct[]
 >(getCartItemsIds, productSelectors.getProducts, (ids, products) => {
+  if (ids.length === 0 || products.length === 0) {
+    return [];
+  }
+
   // Reduce ids array to id:quantity Indexable
   const idsMap = ids.reduce((acc, id) => {
     const currentQuantity = acc[id] || 0;
